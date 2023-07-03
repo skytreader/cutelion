@@ -10,6 +10,12 @@ http://localhost:8080 in your browser.
 You can also import the project to your IDE of choice as you would with any
 Maven project. Read more on [how to import Vaadin projects to different IDEs](https://vaadin.com/docs/latest/guide/step-by-step/importing) (Eclipse, IntelliJ IDEA, NetBeans, and VS Code).
 
+### Database
+
+1. Set-up a local PostgreSQL 15.2 instance.
+2. Run `sudo -u postgres psql -f database.sql`.
+3. Run the migrations bia `mvn liquibase:update`.
+
 ## Deploying to Production
 
 To create a production build, call `mvnw clean package -Pproduction` (Windows),
