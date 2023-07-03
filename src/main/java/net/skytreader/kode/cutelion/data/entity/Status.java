@@ -3,7 +3,7 @@ package net.skytreader.kode.cutelion.data.entity;
 import jakarta.persistence.Entity;
 
 @Entity
-public class Status extends AbstractEntity {
+public class Status extends CreativeAwesomeModel {
     private String name;
 
     public Status() {

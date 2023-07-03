@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Contact extends AbstractEntity {
+public class Contact extends CreativeAwesomeModel {
 
     @NotEmpty
     private String firstName = "";

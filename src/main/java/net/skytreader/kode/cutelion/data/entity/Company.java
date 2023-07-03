@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class Company extends AbstractEntity {
+public class Company extends CreativeAwesomeModel {
     @NotBlank
     private String name;
 
