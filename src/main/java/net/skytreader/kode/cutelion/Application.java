@@ -1,4 +1,4 @@
-package com.example.application;
+package net.skytreader.kode.cutelion;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;

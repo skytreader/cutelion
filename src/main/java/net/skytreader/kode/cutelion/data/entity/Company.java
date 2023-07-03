@@ -1,4 +1,4 @@
-package com.example.application.data.entity;
+package net.skytreader.kode.cutelion.data.entity;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;

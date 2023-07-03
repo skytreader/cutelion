@@ -1,6 +1,6 @@
-package com.example.application.data.repository;
+package net.skytreader.kode.cutelion.data.repository;
 
-import com.example.application.data.entity.Company;
+import net.skytreader.kode.cutelion.data.entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {

@@ -1,4 +1,4 @@
-package com.example.application.data.entity;
+package net.skytreader.kode.cutelion.data.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
