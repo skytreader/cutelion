@@ -9,7 +9,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility.Margin;
 
 @PageTitle("list")
-@Route(value = "")
+@Route(value = "/blerp")
 public class ListView extends VerticalLayout {
 
     public ListView() {
