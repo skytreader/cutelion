@@ -12,4 +12,7 @@ gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
 
+node_modules/
+frontend/generated/
+
 .idea
