@@ -19,4 +19,7 @@ public class DashboardService {
     public boolean hasProjects() {
         return this.projects.size() > 0;
     }
+    public List<Project> getProjects() {
+        return this.projects;
+    }
 }

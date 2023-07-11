@@ -17,14 +17,7 @@ public class DashboardView extends VerticalLayout {
     public DashboardView(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
 
-        add(new Dashboard());
-        H2 viewHeader = new H2("Projects Dashboard");
-        add(viewHeader);
-
-        if (this.dashboardService.hasProjects()){
-
-        } else {
-            add(new Paragraph("No projects found. Start one?"));
-        }
+        // TODO Add the H2 element!
+        add(new Dashboard(dashboardService));
     }
 }
