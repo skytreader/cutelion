@@ -7,6 +7,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import net.skytreader.kode.cutelion.data.service.DashboardService;
+import net.skytreader.kode.cutelion.templates.Dashboard;
 
 @PageTitle("Your Projects - CuteL10N")
 @Route(value="")
@@ -16,8 +17,7 @@ public class DashboardView extends VerticalLayout {
     public DashboardView(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
 
-        H1 appHeader = new H1("CuteL10n");
-        add(appHeader);
+        add(new Dashboard());
         H2 viewHeader = new H2("Projects Dashboard");
         add(viewHeader);
 
