@@ -1,12 +1,10 @@
 package net.skytreader.kode.cutelion.templates;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.littemplate.LitTemplate;
-import elemental.json.Json;
-import elemental.json.JsonValue;
+import com.vaadin.flow.component.template.Id;
 import net.skytreader.kode.cutelion.data.service.DashboardService;
 
 @Tag("dashboard-page")
@@ -14,8 +12,15 @@ import net.skytreader.kode.cutelion.data.service.DashboardService;
 public class Dashboard extends LitTemplate {
     private DashboardService dashboardService;
 
+    @Id("start-project")
+    private NativeButton startProjectButton;
+
     public Dashboard(DashboardService dashboardService){
         this.dashboardService = dashboardService;
+        startProjectButton.addClickListener(event -> {
+            startProjectButton.getUI().ifPresent(ui ->
+                    ui.navigate("project/edit"));
+        });
         getElement().setPropertyList("projects", dashboardService.getProjects());
     }
 }

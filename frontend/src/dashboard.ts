@@ -6,7 +6,7 @@ class Dashboard extends BaseTemplate {
 
     pageContent() {
         return this.projects.length == 0 ? html`
-         <p>No projects found. Start one?</p>
+         <p>No projects found. <button id="start-project">Start one?</button></p>
          ` :
          html`
          <p>Some projects found placeholder.</p>

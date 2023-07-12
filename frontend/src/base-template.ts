@@ -1,8 +1,8 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, HTMLTemplateResult } from 'lit';
 
 export abstract class BaseTemplate extends LitElement {
 
-    abstract pageContent(): any;
+    abstract pageContent(): HTMLTemplateResult;
 
     render() {
         return html`
