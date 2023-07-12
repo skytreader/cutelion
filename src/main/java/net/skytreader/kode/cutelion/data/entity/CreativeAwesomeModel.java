@@ -19,9 +19,6 @@ public abstract class CreativeAwesomeModel {
             "TIMESTAMP WITH TIME ZONE")
     private ZonedDateTime modifiedAt;
 
-    @Version
-    private int version;
-
     public CreativeAwesomeModel() {
         ZonedDateTime now = ZonedDateTime.now();
         this.createdAt = now;
@@ -51,10 +48,6 @@ public abstract class CreativeAwesomeModel {
 
     public void setModifiedAt(ZonedDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
-    }
-
-    public int getVersion() {
-        return version;
     }
 
     @Override
