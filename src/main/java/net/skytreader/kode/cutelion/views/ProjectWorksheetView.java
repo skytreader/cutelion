@@ -6,23 +6,28 @@ import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.templates.ProjectWorksheet;
 
+import java.util.logging.Logger;
+
 @PageTitle("Edit Project - CuteL10N")
 @Route(value="project/edit")
-public class ProjectWorksheetView extends VerticalLayout implements HasUrlParameter<Integer> {
+public class ProjectWorksheetView extends VerticalLayout implements HasUrlParameter<Long> {
     private final ProjectRepository projectRepository;
+    private final static Logger logger =
+            Logger.getLogger(ProjectWorksheetView.class.getName());
     private Project project;
 
     public ProjectWorksheetView(ProjectRepository projectRepository){
+        logger.info("constructor");
         this.projectRepository = projectRepository;
-
-        add(new ProjectWorksheet(projectRepository));
     }
 
     @Override
     public void setParameter(BeforeEvent be,
-                             @OptionalParameter Integer projectId){
+                             @OptionalParameter Long projectId){
+        logger.info("setParameter called");
         if (projectId != null) {
-            this.project = this.projectRepository.fetchProject(projectId);
+            this.project = this.projectRepository.getReferenceById(projectId);
         }
+        add(new ProjectWorksheet(this.projectRepository, this.project));
     }
 }

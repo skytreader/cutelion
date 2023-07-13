@@ -14,7 +14,6 @@ public class DashboardView extends VerticalLayout {
     public DashboardView(DashboardService dashboardService) {
         this.dashboardService = dashboardService;
 
-        // TODO Add the H2 element!
         add(new Dashboard(dashboardService));
     }
 }

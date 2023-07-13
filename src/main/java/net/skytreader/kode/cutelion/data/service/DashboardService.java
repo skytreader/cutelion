@@ -13,7 +13,7 @@ public class DashboardService {
 
     public DashboardService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
-        this.projects = projectRepository.fetchProjects();
+        this.projects = projectRepository.findAll();
     }
 
     public boolean hasProjects() {

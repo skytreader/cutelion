@@ -1,5 +1,8 @@
 package net.skytreader.kode.cutelion.data.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
@@ -13,10 +16,12 @@ public abstract class CreativeAwesomeModel {
 
     @Column(name="created_at", nullable = false, columnDefinition =
             "TIMESTAMP WITH TIME ZONE")
+    @JsonSerialize(using=ZonedDateTimeSerializer.class)
     private ZonedDateTime createdAt;
 
     @Column(name="modified_at", nullable = false, columnDefinition =
             "TIMESTAMP WITH TIME ZONE")
+    @JsonSerialize(using=ZonedDateTimeSerializer.class)
     private ZonedDateTime modifiedAt;
 
     public CreativeAwesomeModel() {
