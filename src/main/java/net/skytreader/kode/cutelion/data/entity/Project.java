@@ -1,8 +1,6 @@
 package net.skytreader.kode.cutelion.data.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import jakarta.annotation.Nullable;
@@ -19,7 +17,6 @@ public class Project extends CreativeAwesomeModel {
     private String defaultLanguage;
 
     @OneToMany(mappedBy = "project")
-    @Nullable
     private List<Translation> translations = new LinkedList<>();
 
     protected Project() {

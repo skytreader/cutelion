@@ -5,6 +5,7 @@ import com.vaadin.flow.router.*;
 import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.templates.ProjectWorksheet;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.logging.Logger;
 
@@ -22,11 +23,13 @@ public class ProjectWorksheetView extends VerticalLayout implements HasUrlParame
     }
 
     @Override
+    @Transactional
     public void setParameter(BeforeEvent be,
                              @OptionalParameter Long projectId){
         logger.info("setParameter called");
         if (projectId != null) {
-            this.project = this.projectRepository.getReferenceById(projectId);
+            this.project = this.projectRepository.findById(projectId).get();
+            logger.info("got project " + this.project.getId());
         }
         add(new ProjectWorksheet(this.projectRepository, this.project));
     }
