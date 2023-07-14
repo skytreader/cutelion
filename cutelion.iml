@@ -88,9 +88,6 @@
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-map-flow:24.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-rich-text-editor-flow:24.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:collaboration-engine:6.0.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.15.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.15.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-core:24.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-dev:24.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-dev-server:24.1.1" level="project" />
@@ -102,7 +99,6 @@
     <orderEntry type="library" name="Maven: com.vaadin:flow-server:24.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.servletdetector:throw-if-servlet3:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:flow-commons-upload:24.1.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.15.0" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.16.1" level="project" />
     <orderEntry type="library" name="Maven: com.helger:ph-css:7.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.helger.commons:ph-commons:11.0.1" level="project" />
@@ -163,6 +159,10 @@
     <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:6.0.9" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.15.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.15.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.15.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-validation:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:3.1.0" level="project" />
