@@ -7,9 +7,10 @@ class Dashboard extends BaseTemplate {
 
     pageContent() {
         const body = this.projects.length == 0 ? html`
-         <p>No projects found. <button id="start-project">Start one?</button></p>
+         <p>No projects found. <button id="start-project">Start New Project</button></p>
          ` :
          html`
+         <button id="start-project">Start New Project</button>
          <ul>
          ${this.projects.map((project) =>
              html `<li><a href="project/edit/${project.id}">${project.name}</a></li>`
