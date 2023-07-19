@@ -7,12 +7,15 @@ class ProjectWorksheet extends BaseTemplate {
     pageContent() {
         const hasProject = this.project !== undefined;
         const headerText = hasProject ? "Edit Project" : "New Project";
+        const buttonText = hasProject ? "Save Project" : "Create Project";
         return html`
         <h2>${headerText}</h2>
         <div>
-        <label>Name: <input type="text" id="project-name" value="${this.project?.name}"></label>
-        <label>Default language: <input type="text" id="default-language" placeholder="en-US" value="${this.project?.defaultLanguage}"></label> 
-        <button id="create-project">Create Project</button>
+        <vaadin-form-layout id="project-details-form">
+        <vaadin-text-field id="project-name" label="Name"></vaadin-text-field>
+        <vaadin-text-field type="text" id="default-language" label="Default Language" placeholder="en-US"></vaadin-text-field>
+        <button id="persist-project">${buttonText}</button>
+        </vaadin-form-layout>
 </div>
         `
     }
