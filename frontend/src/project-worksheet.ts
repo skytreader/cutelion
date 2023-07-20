@@ -3,11 +3,10 @@ import { BaseTemplate } from "Frontend/src/base-template";
 import { Project } from "Frontend/src/data-model";
 
 class ProjectWorksheet extends BaseTemplate {
-    private project?: Project;
+    private hasProject: boolean = false;
     pageContent() {
-        const hasProject = this.project !== undefined;
-        const headerText = hasProject ? "Edit Project" : "New Project";
-        const buttonText = hasProject ? "Save Project" : "Create Project";
+        const headerText = this.hasProject ? "Edit Project" : "New Project";
+        const buttonText = this.hasProject ? "Save Project" : "Create Project";
         return html`
         <h2>${headerText}</h2>
         <div>

@@ -44,15 +44,8 @@ public class ProjectWorksheet extends LitTemplate {
         projectBinder.forField(defaultLanguage).bind(Project::getDefaultLanguage, Project::setDefaultLanguage);
 
         if (project != null) {
-            projectBinder.readBean(project);
-            ObjectMapper om = new ObjectMapper();
-            try {
-                JsonValue jv = JsonUtil.parse(om.writeValueAsString(project));
-                getElement().setPropertyJson("project", jv);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            // FIXME!
+            projectBinder.setBean(project);
+            getElement().setProperty("hasProject", true);
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());
                 this.project.setDefaultLanguage(defaultLanguage.getValue());
