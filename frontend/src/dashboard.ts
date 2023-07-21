@@ -20,7 +20,7 @@ class Dashboard extends BaseTemplate {
         return html`
         <h2>Project Dashboard</h2>
         ${body}
-        `
+        `;
     }
 }
 

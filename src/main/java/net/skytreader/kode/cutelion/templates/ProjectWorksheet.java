@@ -3,6 +3,7 @@ package net.skytreader.kode.cutelion.templates;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.html.NativeButton;
@@ -31,7 +32,7 @@ public class ProjectWorksheet extends LitTemplate {
     private TextField defaultLanguage;
 
     @Id("persist-project")
-    private NativeButton persistProjectButton;
+    private Button persistProjectButton;
 
     public ProjectWorksheet(ProjectRepository projectRepository,
                             Project project){

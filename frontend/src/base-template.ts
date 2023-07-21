@@ -10,7 +10,7 @@ export abstract class BaseTemplate extends LitElement {
             <h1>CuteL10N</h1>
         </div>
         ${this.pageContent()}
-        `
+        `;
     }
 
 }
