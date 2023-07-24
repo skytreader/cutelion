@@ -1,10 +1,13 @@
 package net.skytreader.kode.cutelion.data.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import jakarta.annotation.Nullable;
 
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +18,9 @@ public class Project extends CreativeAwesomeModel {
     private String name;
     @Nullable
     private String defaultLanguage;
+    @Column(name="last_entry_added_at", nullable = true, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @JsonSerialize(using= ZonedDateTimeSerializer.class)
+    private ZonedDateTime lastEntryAddedAt;
 
     @OneToMany(mappedBy = "project")
     private List<Translation> translations = new LinkedList<>();
@@ -44,5 +50,13 @@ public class Project extends CreativeAwesomeModel {
 
     public void setDefaultLanguage(@Nullable String defaultLanguage) {
         this.defaultLanguage = defaultLanguage;
+    }
+
+    public ZonedDateTime getLastEntryAddedAt() {
+        return lastEntryAddedAt;
+    }
+
+    public void setLastEntryAddedAt(ZonedDateTime lastEntryAddedAt) {
+        this.lastEntryAddedAt = lastEntryAddedAt;
     }
 }
