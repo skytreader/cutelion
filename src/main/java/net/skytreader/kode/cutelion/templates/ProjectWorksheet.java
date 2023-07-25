@@ -46,6 +46,13 @@ public class ProjectWorksheet extends LitTemplate {
 
         if (project != null) {
             projectBinder.setBean(project);
+            ObjectMapper om = new ObjectMapper();
+            try {
+                JsonValue jv = JsonUtil.parse(om.writeValueAsString(project));
+                getElement().setPropertyJson("project", jv);
+            } catch (JsonProcessingException jpe) {
+                jpe.printStackTrace();
+            }
             getElement().setProperty("hasProject", true);
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());

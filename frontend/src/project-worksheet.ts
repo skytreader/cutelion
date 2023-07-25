@@ -1,9 +1,10 @@
 import { html } from 'lit';
 import { BaseTemplate } from "Frontend/src/base-template";
 import {FormLayoutResponsiveStep} from "@vaadin/form-layout/vaadin-form-layout";
+import {Project} from "Frontend/src/data-model";
 
 class ProjectWorksheet extends BaseTemplate {
-    private hasProject: boolean = false;
+    private project?: Project;
 
     // https://vaadin.com/docs/latest/components/form-layout
     private responsiveSteps: FormLayoutResponsiveStep[] = [
@@ -11,9 +12,11 @@ class ProjectWorksheet extends BaseTemplate {
         {minWidth: '320px', columns: 2},
         {minWidth: '550px', columns: 4}
     ];
-    pageContent() {
-        const headerText = this.hasProject ? "Edit Project" : "New Project";
-        const buttonText = this.hasProject ? "Save Project" : "Create Project";
+    protected override pageContent() {
+        const hasProject = this.project !== undefined;
+        const headerText = hasProject ? `Edit Project - ${this.project?.name}` : "New" +
+            " Project";
+        const buttonText = hasProject ? "Save Project" : "Create Project";
         return html`
         <h2>${headerText}</h2>
         <vaadin-horizontal-layout theme="spacing">

@@ -5,7 +5,7 @@ import {Project} from "Frontend/src/data-model";
 class Dashboard extends BaseTemplate {
     private projects: Array<Project> = [];
 
-    pageContent() {
+    protected override pageContent() {
         const body = this.projects.length == 0 ? html`
          <p>No projects found. <button id="start-project">Start New Project</button></p>
          ` :
