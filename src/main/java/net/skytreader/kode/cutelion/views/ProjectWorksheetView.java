@@ -7,14 +7,27 @@ import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.templates.ProjectWorksheet;
 import org.springframework.transaction.annotation.Transactional;
 
-@PageTitle("Edit Project - CuteL10N")
 @Route(value="project/edit")
-public class ProjectWorksheetView extends VerticalLayout implements HasUrlParameter<Long> {
+public class ProjectWorksheetView extends VerticalLayout implements HasUrlParameter<Long>, HasDynamicTitle {
     private final ProjectRepository projectRepository;
     private Project project;
 
     public ProjectWorksheetView(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
+    }
+
+    /**
+     * For some stupid reason, the annotation won't work. Good thing this
+     * module <em>does</em> have a dynamic title.
+     * @return
+     */
+    @Override
+    public String getPageTitle() {
+        if (this.project == null) {
+            return "Edit Project - CuteL10N";
+        } else {
+            return "Edit Project - " + this.project.getName() + " - CuteL10N";
+        }
     }
 
     @Override
