@@ -20,12 +20,16 @@ class ProjectWorksheet extends BaseTemplate {
         return html`
         <h2>${headerText}</h2>
         <vaadin-horizontal-layout theme="spacing">
-        <vaadin-form-layout id="project-details-form" .responsiveSteps="${this.responsiveSteps}">
-        <vaadin-text-field id="project-name" label="Name"></vaadin-text-field>
-        <vaadin-text-field type="text" id="default-language" label="Default Language" placeholder="en-US"></vaadin-text-field>
-        </vaadin-form-layout>
-        <vaadin-button id="persist-project" theme="primary">${buttonText}</vaadin-button>
-</vaadin-horizontal-layout>
+            <vaadin-form-layout id="project-details-form" .responsiveSteps="${this.responsiveSteps}">
+            <vaadin-text-field id="project-name" label="Name"></vaadin-text-field>
+            <vaadin-text-field type="text" id="default-language" label="Default Language" placeholder="en-US"></vaadin-text-field>
+            </vaadin-form-layout>
+            <vaadin-button id="persist-project" theme="primary" style="top: 20px;">${buttonText}</vaadin-button>
+        </vaadin-horizontal-layout>
+        <vaadin-grid .items="${this.project?.translations}">
+            <vaadin-grid-column flex-grow="1" path="key"></vaadin-grid-column>
+            <vaadin-grid-column flex-grow="1" path="value"></vaadin-grid-column>
+        </vaadin-grid>
         `;
     }
 }
