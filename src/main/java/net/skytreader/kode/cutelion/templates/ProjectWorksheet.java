@@ -15,6 +15,7 @@ import elemental.json.JsonValue;
 import elemental.json.impl.JsonUtil;
 import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
+import net.skytreader.kode.cutelion.logic.Utils;
 
 import java.awt.*;
 import java.time.ZonedDateTime;
@@ -40,9 +41,14 @@ public class ProjectWorksheet extends LitTemplate {
         this.project = project;
 
         Binder<Project> projectBinder = new Binder<>(Project.class);
-        projectBinder.forField(projectName).bind(Project::getName,
+        projectBinder.forField(projectName)
+                .asRequired("project name is required")
+                .bind(Project::getName,
                 Project::setName);
-        projectBinder.forField(defaultLanguage).bind(Project::getDefaultLanguage, Project::setDefaultLanguage);
+        projectBinder.forField(defaultLanguage)
+                .withValidator(Utils::isValidLocaleString, "does not fit " +
+                        "locale string pattern")
+                .bind(Project::getDefaultLanguage, Project::setDefaultLanguage);
 
         if (project != null) {
             projectBinder.setBean(project);
