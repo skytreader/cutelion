@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Input;
-import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.TextField;
@@ -14,10 +12,10 @@ import com.vaadin.flow.data.binder.Binder;
 import elemental.json.JsonValue;
 import elemental.json.impl.JsonUtil;
 import net.skytreader.kode.cutelion.data.entity.Project;
+import net.skytreader.kode.cutelion.data.entity.Translation;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.logic.Utils;
 
-import java.awt.*;
 import java.time.ZonedDateTime;
 
 @Tag("project-worksheet")
@@ -34,6 +32,9 @@ public class ProjectWorksheet extends LitTemplate {
 
     @Id("persist-project")
     private Button persistProjectButton;
+
+    @Id("translation-key")
+    private TextField translationKey;
 
     public ProjectWorksheet(ProjectRepository projectRepository,
                             Project project){
@@ -77,5 +78,10 @@ public class ProjectWorksheet extends LitTemplate {
                         "/edit/" + p.getId()));
             });
         }
+    }
+
+    private Binder<Translation> createTranslationBinder() {
+        Binder<Translation> translationBinder = new Binder<>(Translation.class);
+       return translationBinder;
     }
 }

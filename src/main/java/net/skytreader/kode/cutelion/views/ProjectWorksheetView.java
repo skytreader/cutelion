@@ -24,7 +24,7 @@ public class ProjectWorksheetView extends VerticalLayout implements HasUrlParame
     @Override
     public String getPageTitle() {
         if (this.project == null) {
-            return "Edit Project - CuteL10N";
+            return "New Project - CuteL10N";
         } else {
             return "Edit Project - " + this.project.getName() + " - CuteL10N";
         }

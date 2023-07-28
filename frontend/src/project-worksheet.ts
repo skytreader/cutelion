@@ -26,6 +26,7 @@ class ProjectWorksheet extends BaseTemplate {
             </vaadin-form-layout>
             <vaadin-button id="persist-project" theme="primary" style="top: 20px;">${buttonText}</vaadin-button>
         </vaadin-horizontal-layout>
+        <slot>
         ${
             hasProject ?
                 html`
@@ -38,6 +39,7 @@ class ProjectWorksheet extends BaseTemplate {
                 </vaadin-horizontal-layout>
                 ` : nothing
         }
+        </slot>
         <vaadin-grid .items="${this.project?.translations}">
             <vaadin-grid-column flex-grow="1" path="key"></vaadin-grid-column>
             <vaadin-grid-column flex-grow="1" path="value"></vaadin-grid-column>
