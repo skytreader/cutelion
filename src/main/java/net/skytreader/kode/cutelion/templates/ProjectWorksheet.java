@@ -14,6 +14,7 @@ import elemental.json.impl.JsonUtil;
 import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.entity.Translation;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
+import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.logic.Utils;
 
 import java.time.ZonedDateTime;
@@ -36,7 +37,14 @@ public class ProjectWorksheet extends LitTemplate {
     @Id("translation-key")
     private TextField translationKey;
 
+    @Id("translation-value")
+    private TextField translationValue;
+
+    @Id("add-translation")
+    private Button addTranslationButton;
+
     public ProjectWorksheet(ProjectRepository projectRepository,
+                            TranslationRepository translationRepository,
                             Project project){
         this.projectRepository = projectRepository;
         this.project = project;
@@ -60,12 +68,19 @@ public class ProjectWorksheet extends LitTemplate {
             } catch (JsonProcessingException jpe) {
                 jpe.printStackTrace();
             }
-            getElement().setProperty("hasProject", true);
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());
                 this.project.setDefaultLanguage(defaultLanguage.getValue());
                 this.project.setModifiedAt(ZonedDateTime.now());
                 projectRepository.save(this.project);
+            });
+            addTranslationButton.addClickListener(event -> {
+                Translation t = new Translation(
+                        translationKey.getValue(),
+                        translationValue.getValue(),
+                        this.project
+                );
+                translationRepository.save(t);
             });
         } else {
             persistProjectButton.addClickListener(event -> {
@@ -82,6 +97,12 @@ public class ProjectWorksheet extends LitTemplate {
 
     private Binder<Translation> createTranslationBinder() {
         Binder<Translation> translationBinder = new Binder<>(Translation.class);
+        translationBinder.forField(translationKey)
+                .asRequired()
+                .bind(Translation::getKey, Translation::setKey);
+        translationBinder.forField(translationValue)
+                .asRequired()
+                .bind(Translation::getValue, Translation::setValue);
        return translationBinder;
     }
 }
