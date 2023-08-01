@@ -80,7 +80,9 @@ public class ProjectWorksheet extends LitTemplate {
                         translationValue.getValue(),
                         this.project
                 );
+                this.project.setLastEntryAddedAt(t.getCreatedAt());
                 translationRepository.save(t);
+                projectRepository.save(this.project);
             });
         } else {
             persistProjectButton.addClickListener(event -> {
