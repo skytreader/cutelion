@@ -1,5 +1,6 @@
 package net.skytreader.kode.cutelion.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import jakarta.persistence.*;
@@ -22,7 +23,8 @@ public class Project extends CreativeAwesomeModel {
     @JsonSerialize(using= ZonedDateTimeSerializer.class)
     private ZonedDateTime lastEntryAddedAt;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+    @JsonManagedReference
     private List<Translation> translations = new LinkedList<>();
 
     protected Project() {

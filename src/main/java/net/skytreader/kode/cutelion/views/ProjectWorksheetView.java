@@ -6,7 +6,6 @@ import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.templates.ProjectWorksheet;
-import org.springframework.transaction.annotation.Transactional;
 
 @Route(value="project/edit")
 public class ProjectWorksheetView extends VerticalLayout implements HasUrlParameter<Long>, HasDynamicTitle {
@@ -35,7 +34,6 @@ public class ProjectWorksheetView extends VerticalLayout implements HasUrlParame
     }
 
     @Override
-    @Transactional
     public void setParameter(BeforeEvent be,
                              @OptionalParameter Long projectId){
         if (projectId != null) {

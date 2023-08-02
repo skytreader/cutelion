@@ -1,5 +1,6 @@
 package net.skytreader.kode.cutelion.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,6 +19,7 @@ public class Translation extends CreativeAwesomeModel {
     @ManyToOne
     @JoinColumn(name="project_id")
     @NotNull
+    @JsonBackReference
     private Project project;
 
     protected Translation() {
