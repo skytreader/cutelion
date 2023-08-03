@@ -61,4 +61,8 @@ public class Project extends CreativeAwesomeModel {
     public void setLastEntryAddedAt(ZonedDateTime lastEntryAddedAt) {
         this.lastEntryAddedAt = lastEntryAddedAt;
     }
+
+    public List<Translation> getTranslations() {
+        return translations;
+    }
 }

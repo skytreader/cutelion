@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.TextField;
@@ -80,9 +81,14 @@ public class ProjectWorksheet extends LitTemplate {
                         translationValue.getValue(),
                         this.project
                 );
+                translationKey.clear();
+                translationValue.clear();
                 this.project.setLastEntryAddedAt(t.getCreatedAt());
                 translationRepository.save(t);
                 projectRepository.save(this.project);
+                //translationGrid.getDataProvider().refreshAll();
+                getElement().callJsFunction("addTranslation", t.getKey(),
+                        t.getValue());
             });
         } else {
             persistProjectButton.addClickListener(event -> {

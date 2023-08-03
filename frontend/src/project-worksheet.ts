@@ -12,6 +12,12 @@ class ProjectWorksheet extends BaseTemplate {
         {minWidth: '320px', columns: 2},
         {minWidth: '550px', columns: 4}
     ];
+
+    public addTranslation(key: string, value: string) {
+        console.log("addTranslation called");
+        this.project?.translations.push({key, value});
+    }
+
     protected override pageContent() {
         const hasProject = this.project !== undefined;
         const headerText = hasProject ? `Edit Project - ${this.project?.name}` : "New" +
@@ -33,7 +39,7 @@ class ProjectWorksheet extends BaseTemplate {
             </vaadin-form-layout>
             <vaadin-button id="add-translation" theme="secondary" style="top: 20px;">Add Translation</vaadin-button>
         </vaadin-horizontal-layout>
-        <vaadin-grid .items="${this.project?.translations}">
+        <vaadin-grid .items="${this.project?.translations}" id="translation-grid">
             <vaadin-grid-column flex-grow="1" path="key"></vaadin-grid-column>
             <vaadin-grid-column flex-grow="1" path="value"></vaadin-grid-column>
         </vaadin-grid>
