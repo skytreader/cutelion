@@ -1,9 +1,11 @@
 import { html, nothing } from 'lit';
+import { property } from 'lit-element';
 import { BaseTemplate } from "Frontend/src/base-template";
 import {FormLayoutResponsiveStep} from "@vaadin/form-layout/vaadin-form-layout";
 import {Project} from "Frontend/src/data-model";
 
 class ProjectWorksheet extends BaseTemplate {
+    @property()
     private project?: Project;
 
     // https://vaadin.com/docs/latest/components/form-layout
@@ -14,8 +16,12 @@ class ProjectWorksheet extends BaseTemplate {
     ];
 
     public addTranslation(key: string, value: string) {
-        console.log("addTranslation called");
-        this.project?.translations.push({key, value});
+        const translationsCopy = Array.from(this.project?.translations || []);
+        translationsCopy.push({key, value});
+        if (this.project !== undefined && "translations" in this.project) {
+            this.project.translations = translationsCopy;
+        }
+        this.requestUpdate();
     }
 
     protected override pageContent() {
