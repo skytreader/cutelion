@@ -7,7 +7,7 @@ export abstract class BaseTemplate extends LitElement {
     render() {
         return html`
         <div>
-            <h1>CuteL10N</h1>
+            <h1><a href="/">CuteL10N</a></h1>
         </div>
         ${this.pageContent()}
         `;

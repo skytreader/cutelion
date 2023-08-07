@@ -38,17 +38,19 @@ class ProjectWorksheet extends BaseTemplate {
             </vaadin-form-layout>
             <vaadin-button id="persist-project" theme="primary" style="top: 20px;">${buttonText}</vaadin-button>
         </vaadin-horizontal-layout>
-        <vaadin-horizontal-layout ?hidden="${!hasProject}">
-            <vaadin-form-layout id="translation-form" .responsiveSteps="${this.responsiveSteps}">
-                <vaadin-text-field id="translation-key" label="Translation Key"></vaadin-text-field>
-                <vaadin-text-field id="translation-value" label="String value"></vaadin-text-field>
-            </vaadin-form-layout>
-            <vaadin-button id="add-translation" theme="secondary" style="top: 20px;">Add Translation</vaadin-button>
-        </vaadin-horizontal-layout>
-        <vaadin-grid .items="${this.project?.translations}" id="translation-grid">
-            <vaadin-grid-column flex-grow="1" path="key"></vaadin-grid-column>
-            <vaadin-grid-column flex-grow="1" path="value"></vaadin-grid-column>
-        </vaadin-grid>
+        <vaadin-vertical-layout ?hidden="${!hasProject}">
+            <vaadin-horizontal-layout>
+                <vaadin-form-layout id="translation-form" .responsiveSteps="${this.responsiveSteps}">
+                    <vaadin-text-field id="translation-key" label="Translation Key"></vaadin-text-field>
+                    <vaadin-text-field id="translation-value" label="String value"></vaadin-text-field>
+                </vaadin-form-layout>
+                <vaadin-button id="add-translation" theme="secondary" style="top: 20px;">Add Translation</vaadin-button>
+            </vaadin-horizontal-layout>
+            <vaadin-grid .items="${this.project?.translations}" id="translation-grid">
+                <vaadin-grid-column flex-grow="1" path="key"></vaadin-grid-column>
+                <vaadin-grid-column flex-grow="1" path="value"></vaadin-grid-column>
+            </vaadin-grid>
+        </vaadin-vertical-layout>
         `;
     }
 }
