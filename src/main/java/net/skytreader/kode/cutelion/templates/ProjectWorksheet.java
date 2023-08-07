@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.TextField;
@@ -50,15 +49,7 @@ public class ProjectWorksheet extends LitTemplate {
         this.projectRepository = projectRepository;
         this.project = project;
 
-        Binder<Project> projectBinder = new Binder<>(Project.class);
-        projectBinder.forField(projectName)
-                .asRequired("project name is required")
-                .bind(Project::getName,
-                Project::setName);
-        projectBinder.forField(defaultLanguage)
-                .withValidator(Utils::isValidLocaleString, "does not fit " +
-                        "locale string pattern")
-                .bind(Project::getDefaultLanguage, Project::setDefaultLanguage);
+        Binder<Project> projectBinder = this.createProjectBinder();
 
         if (project != null) {
             projectBinder.setBean(project);
@@ -86,7 +77,6 @@ public class ProjectWorksheet extends LitTemplate {
                 this.project.setLastEntryAddedAt(t.getCreatedAt());
                 translationRepository.save(t);
                 projectRepository.save(this.project);
-                //translationGrid.getDataProvider().refreshAll();
                 getElement().callJsFunction("addTranslation", t.getKey(),
                         t.getValue());
             });
@@ -112,5 +102,18 @@ public class ProjectWorksheet extends LitTemplate {
                 .asRequired()
                 .bind(Translation::getValue, Translation::setValue);
        return translationBinder;
+    }
+
+    private Binder<Project> createProjectBinder() {
+        Binder<Project> projectBinder = new Binder<>(Project.class);
+        projectBinder.forField(projectName)
+                .asRequired("project name is required")
+                .bind(Project::getName,
+                        Project::setName);
+        projectBinder.forField(defaultLanguage)
+                .withValidator(Utils::isValidLocaleString, "does not fit " +
+                        "locale string pattern")
+                .bind(Project::getDefaultLanguage, Project::setDefaultLanguage);
+        return projectBinder;
     }
 }
