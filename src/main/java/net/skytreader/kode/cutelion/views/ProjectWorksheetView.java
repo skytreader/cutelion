@@ -6,6 +6,7 @@ import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.templates.ProjectWorksheet;
+import org.springframework.transaction.annotation.Transactional;
 
 @Route(value="project/edit")
 public class ProjectWorksheetView extends VerticalLayout implements HasUrlParameter<Long>, HasDynamicTitle {
@@ -33,11 +34,14 @@ public class ProjectWorksheetView extends VerticalLayout implements HasUrlParame
         }
     }
 
+    @Transactional
     @Override
     public void setParameter(BeforeEvent be,
                              @OptionalParameter Long projectId){
         if (projectId != null) {
             this.project = this.projectRepository.findById(projectId).get();
+            // IMPORTANT: Initialize lazy-loaded field.
+            this.project.getTranslations();
         }
         add(new ProjectWorksheet(this.projectRepository,
                 this.translationRepository, this.project));

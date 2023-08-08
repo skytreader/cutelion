@@ -16,11 +16,13 @@ import net.skytreader.kode.cutelion.data.entity.Translation;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.logic.Utils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 
 @Tag("project-worksheet")
 @JsModule("./src/project-worksheet.ts")
+@Transactional
 public class ProjectWorksheet extends LitTemplate {
     private Project project;
     private ProjectRepository projectRepository;

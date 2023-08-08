@@ -23,7 +23,7 @@ public class Project extends CreativeAwesomeModel {
     @JsonSerialize(using= ZonedDateTimeSerializer.class)
     private ZonedDateTime lastEntryAddedAt;
 
-    @OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Translation> translations = new LinkedList<>();
 
