@@ -18,8 +18,6 @@ import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.logic.Utils;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
-
 @Tag("project-worksheet")
 @JsModule("./src/project-worksheet.ts")
 @Transactional
@@ -68,7 +66,6 @@ public class ProjectWorksheet extends LitTemplate {
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());
                 this.project.setDefaultLanguage(defaultLanguage.getValue());
-                this.project.setModifiedAt(ZonedDateTime.now());
                 projectRepository.save(this.project);
             });
             addTranslationButton.addClickListener(event -> {
