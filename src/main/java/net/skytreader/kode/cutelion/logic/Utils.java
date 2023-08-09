@@ -8,4 +8,8 @@ public class Utils {
         String trimmed = l.trim();
         return Pattern.matches("[a-zA-Z]+(-[a-zA-Z0-9]+)*", trimmed);
     }
+
+    public static final String toCanonlocaleForm(String locale) {
+        return locale.toLowerCase();
+    }
 }

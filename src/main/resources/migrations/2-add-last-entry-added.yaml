@@ -10,3 +10,7 @@ databaseChangeLog:
               type: TIMESTAMP WITH TIME ZONE
               constraints:
                 nullable: true
+      rollback:
+        - dropColumn:
+            columnName: last_entry_added_at
+            tableName: projects

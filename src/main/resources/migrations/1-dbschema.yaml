@@ -99,3 +99,10 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk-translations-project_id
                     references: "projects(id)"
+      rollback:
+        - dropTable:
+            tableName: installation_config
+        - dropTable:
+            tableName: projects
+        - dropTable:
+            tableName: translations

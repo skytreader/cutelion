@@ -42,6 +42,9 @@ public class ProjectWorksheet extends LitTemplate {
     @Id("translation-value")
     private TextField translationValue;
 
+    @Id("translation-locale")
+    private TextField translationLocale;
+
     @Id("add-translation")
     private Button addTranslationButton;
 
@@ -72,6 +75,7 @@ public class ProjectWorksheet extends LitTemplate {
                 Translation t = new Translation(
                         translationKey.getValue(),
                         translationValue.getValue(),
+                        translationLocale.getValue(),
                         this.project
                 );
                 translationKey.clear();
@@ -80,7 +84,7 @@ public class ProjectWorksheet extends LitTemplate {
                 translationRepository.save(t);
                 projectRepository.save(this.project);
                 getElement().callJsFunction("addTranslation", t.getKey(),
-                        t.getValue());
+                        t.getValue(), t.getLocale());
             });
         } else {
             persistProjectButton.addClickListener(event -> {
@@ -103,6 +107,10 @@ public class ProjectWorksheet extends LitTemplate {
         translationBinder.forField(translationValue)
                 .asRequired()
                 .bind(Translation::getValue, Translation::setValue);
+        translationBinder.forField(translationLocale)
+                .withValidator(Utils::isValidLocaleString, "does not match " +
+                        "locale string pattern")
+                .bind(Translation::getLocale, Translation::setLocale);
        return translationBinder;
     }
 

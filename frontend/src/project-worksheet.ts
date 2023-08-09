@@ -15,9 +15,9 @@ class ProjectWorksheet extends BaseTemplate {
         {minWidth: '550px', columns: 4}
     ];
 
-    public addTranslation(key: string, value: string) {
+    public addTranslation(key: string, value: string, locale: string) {
         const translationsCopy = Array.from(this.project?.translations || []);
-        translationsCopy.push({key, value});
+        translationsCopy.push({key, value, locale});
         if (this.project !== undefined && "translations" in this.project) {
             this.project.translations = translationsCopy;
         }
@@ -43,12 +43,14 @@ class ProjectWorksheet extends BaseTemplate {
                 <vaadin-form-layout id="translation-form" .responsiveSteps="${this.responsiveSteps}">
                     <vaadin-text-field id="translation-key" label="Translation Key"></vaadin-text-field>
                     <vaadin-text-field id="translation-value" label="String value"></vaadin-text-field>
+                    <vaadin-text-field id="translation-locale" label="Locale"></vaadin-text-field>
                 </vaadin-form-layout>
                 <vaadin-button id="add-translation" theme="secondary" style="top: 20px;">Add Translation</vaadin-button>
             </vaadin-horizontal-layout>
             <vaadin-grid .items="${this.project?.translations}" id="translation-grid">
                 <vaadin-grid-column flex-grow="1" path="key"></vaadin-grid-column>
                 <vaadin-grid-column flex-grow="1" path="value"></vaadin-grid-column>
+                <vaadin-grid-column flex-grow="1" path="locale"></vaadin-grid-column>
             </vaadin-grid>
         </vaadin-vertical-layout>
         `;

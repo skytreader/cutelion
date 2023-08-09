@@ -7,6 +7,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import net.skytreader.kode.cutelion.logic.Utils;
+
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name="translations")
@@ -16,6 +19,8 @@ public class Translation extends CreativeAwesomeModel {
     private String key;
     @NotNull
     private String value;
+    @NotNull
+    private String locale;
     @ManyToOne
     @JoinColumn(name="project_id")
     @NotNull
@@ -26,10 +31,13 @@ public class Translation extends CreativeAwesomeModel {
 
     }
 
-    public Translation(String key, String value, Project project) {
+    public Translation(String key, String value,
+                       String locale, Project project) {
+        super();
         this.key = key;
         this.value = value;
         this.project = project;
+        this.locale = locale;
     }
 
     public String getKey() {
@@ -54,5 +62,17 @@ public class Translation extends CreativeAwesomeModel {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        if (Utils.isValidLocaleString(locale)) {
+            this.locale = Utils.toCanonlocaleForm(locale);
+        } else {
+            throw new IllegalArgumentException("Invalid locale format: " + locale);
+        }
     }
 }

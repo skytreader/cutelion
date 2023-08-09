@@ -13,7 +13,7 @@ Maven project. Read more on [how to import Vaadin projects to different IDEs](ht
 
 1. Set-up a local PostgreSQL 15.2 instance.
 2. Run `sudo -u postgres psql -f database.sql`.
-3. Run the migrations bia `mvn liquibase:update`.
+3. Run the migrations via `mvn liquibase:update`.
 
 ## Deploying to Production
 

@@ -1,6 +1,7 @@
 export interface Translation {
     key: String;
     value: String;
+    locale: String;
 }
 
 export interface Project {

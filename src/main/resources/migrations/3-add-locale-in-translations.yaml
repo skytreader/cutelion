@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Chad Estioco
+      changes:
+        - addColumn:
+            tableName: translations
+            column:
+              name: locale
+              type: VARCHAR(255)
+              constraints:
+                nullable: true
+        - update:
+            tableName: translations
+            column:
+              name: locale
+              value: "xx-xx"
+            where: "locale IS NULL"
+        - addNotNullConstraint:
+            tableName: translations
+            columnName: locale
+      rollback:
+        - dropColumn:
+            tableName: translations
+            columnName: locale
