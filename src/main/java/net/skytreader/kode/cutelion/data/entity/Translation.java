@@ -37,7 +37,7 @@ public class Translation extends CreativeAwesomeModel {
         this.key = key;
         this.value = value;
         this.project = project;
-        this.locale = locale;
+        this.locale = Utils.toCanonlocaleForm(locale);
         this.project.setLastEntryAddedAt(ZonedDateTime.now());
     }
 
@@ -66,7 +66,7 @@ public class Translation extends CreativeAwesomeModel {
     }
 
     public String getLocale() {
-        return locale;
+        return Utils.toCanonlocaleForm(locale);
     }
 
     public void setLocale(String locale) {

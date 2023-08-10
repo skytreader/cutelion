@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import jakarta.annotation.Nullable;
+import net.skytreader.kode.cutelion.logic.Utils;
 
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
@@ -34,7 +35,7 @@ public class Project extends CreativeAwesomeModel {
     public Project(String name, String defaultLanguage) {
         super();
         this.name = name;
-        this.defaultLanguage = defaultLanguage;
+        this.defaultLanguage = Utils.toCanonlocaleForm(defaultLanguage);
     }
 
     public String getName() {
@@ -47,11 +48,11 @@ public class Project extends CreativeAwesomeModel {
 
     @Nullable
     public String getDefaultLanguage() {
-        return defaultLanguage;
+        return Utils.toCanonlocaleForm(defaultLanguage);
     }
 
     public void setDefaultLanguage(@Nullable String defaultLanguage) {
-        this.defaultLanguage = defaultLanguage;
+        this.defaultLanguage = Utils.toCanonlocaleForm(defaultLanguage);
     }
 
     public ZonedDateTime getLastEntryAddedAt() {
