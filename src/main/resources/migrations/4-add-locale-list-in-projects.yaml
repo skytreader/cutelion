@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Chad Estioco
+      changes:
+        - addColumn:
+            tableName: projects
+            column:
+              name: locales
+              type: TEXT[]
+              defaultValue: "{}"
+      rollback:
+        - dropColumn:
+            tableName: projects
+            columnName: locales
