@@ -18,6 +18,8 @@ import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.logic.Utils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
+
 @Tag("project-worksheet")
 @JsModule("./src/project-worksheet.ts")
 @Transactional
@@ -87,7 +89,8 @@ public class ProjectWorksheet extends LitTemplate {
             persistProjectButton.addClickListener(event -> {
                 String _projectName = projectName.getValue();
                 String _defaultLanguage = defaultLanguage.getValue();
-                Project p = new Project(_projectName, _defaultLanguage);
+                Project p = new Project(_projectName, _defaultLanguage,
+                        Arrays.asList(_defaultLanguage));
                 projectRepository.save(p);
 
                 persistProjectButton.getUI().ifPresent(ui -> ui.navigate("project" +

@@ -103,6 +103,24 @@
         </dependency>
 
         <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.2.7.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jakarta-xmlbind-annotations</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-utils-hibernate-62</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.9.3</version>
@@ -126,6 +144,7 @@
             <artifactId>modelmapper-module-jsr310</artifactId>
             <version>1.2.3</version>
         </dependency>
+
 
     </dependencies>
 

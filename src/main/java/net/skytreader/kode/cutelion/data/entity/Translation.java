@@ -39,6 +39,13 @@ public class Translation extends CreativeAwesomeModel {
         this.project = project;
         this.locale = Utils.toCanonlocaleForm(locale);
         this.project.setLastEntryAddedAt(ZonedDateTime.now());
+        this.updateProjectLocales();
+    }
+
+    private void updateProjectLocales() {
+        if (!this.project.getLocales().contains(this.locale)) {
+            this.project.addLocale(this.locale);
+        }
     }
 
     public String getKey() {
@@ -72,6 +79,7 @@ public class Translation extends CreativeAwesomeModel {
     public void setLocale(String locale) {
         if (Utils.isValidLocaleString(locale)) {
             this.locale = Utils.toCanonlocaleForm(locale);
+            this.updateProjectLocales();
         } else {
             throw new IllegalArgumentException("Invalid locale format: " + locale);
         }

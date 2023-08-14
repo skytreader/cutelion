@@ -139,21 +139,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:5.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:6.0.9" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate.orm:hibernate-core:6.2.2.Final" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.persistence:jakarta.persistence-api:3.1.0" level="project" />
-    <orderEntry type="library" name="Maven: jakarta.transaction:jakarta.transaction-api:2.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.5.0.Final" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.hibernate.common:hibernate-commons-annotations:6.0.6.Final" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: io.smallrye:jandex:3.0.5" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: net.bytebuddy:byte-buddy:1.14.4" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish.jaxb:jaxb-runtime:4.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish.jaxb:jaxb-core:4.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.eclipse.angus:angus-activation:2.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish.jaxb:txw2:4.0.2" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.sun.istack:istack-commons-runtime:4.1.1" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: jakarta.inject:jakarta.inject-api:2.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.10.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:6.0.9" level="project" />
@@ -186,8 +171,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:3.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:3.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.jayway.jsonpath:json-path:2.8.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: jakarta.activation:jakarta.activation-api:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:4.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: net.minidev:json-smart:2.4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: net.minidev:accessors-smart:2.4.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:3.24.2" level="project" />
@@ -330,6 +314,26 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin:vaadin-upload-testbench:24.1.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.postgresql:postgresql:42.6.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.checkerframework:checker-qual:3.31.0" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.orm:hibernate-core:6.2.7.Final" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.persistence:jakarta.persistence-api:3.1.0" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.transaction:jakarta.transaction-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.5.0.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.hibernate.common:hibernate-commons-annotations:6.0.6.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: io.smallrye:jandex:3.0.5" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.5.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: net.bytebuddy:byte-buddy:1.14.4" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish.jaxb:jaxb-runtime:4.0.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish.jaxb:jaxb-core:4.0.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.eclipse.angus:angus-activation:2.0.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.glassfish.jaxb:txw2:4.0.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.sun.istack:istack-commons-runtime:4.1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: jakarta.inject:jakarta.inject-api:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.antlr:antlr4-runtime:4.10.1" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:2.15.2" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.activation:jakarta.activation-api:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: io.hypersistence:hypersistence-utils-hibernate-62:3.5.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: io.hypersistence:hypersistence-tsid:2.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.9.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.9.3" level="project" />
