@@ -12,4 +12,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             "DESC NULLS LAST, p.modified_at DESC  NULLS LAST LIMIT 10",
             nativeQuery = true)
     List<Project> fetchDashboard();
+    @Query(value = "SELECT 1 FROM projects LIMIT 1", nativeQuery = true)
+    boolean existsAny();
 }

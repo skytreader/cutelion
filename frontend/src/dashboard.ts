@@ -11,11 +11,11 @@ class Dashboard extends BaseTemplate {
          ` :
          html`
          <vaadin-button theme="primary" id="start-project">Start New Project</vaadin-button>
-         <ul>
+         <vaadin-list-box>
          ${this.projects.map((project) =>
-             html `<li><a href="project/edit/${project.id}">${project.name}</a></li>`
+             html `<vaadin-item><a href="project/edit/${project.id}">${project.name}</a></vaadin-item>`
          )}
-        </ul>
+        </vaadin-list-box>
          `
         return html`
         <h2>Project Dashboard</h2>
