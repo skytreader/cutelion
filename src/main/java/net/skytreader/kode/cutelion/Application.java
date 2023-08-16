@@ -2,6 +2,7 @@ package net.skytreader.kode.cutelion;
 
 import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-@Theme(value = "CuteL10N")
+@Theme(value = "CuteL10N", variant= Lumo.DARK)
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
