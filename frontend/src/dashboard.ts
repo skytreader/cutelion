@@ -14,10 +14,7 @@ class Dashboard extends BaseTemplate {
            <vaadin-button theme="primary error" id="delete-project">- Delete</vaadin-button>
          </vaadin-horizontal-layout>
          <vaadin-list-box style="border: 1px solid #edf2f4" id="project-list">
-         ${this.projects.map((project) =>
-            html `<vaadin-item><a href="project/edit/${project.id}">${project.name}</a></vaadin-item><hr>`
-        )}
-        </vaadin-list-box>
+         </vaadin-list-box>
         `;
     }
 }
