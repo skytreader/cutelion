@@ -12,3 +12,7 @@ export interface Project {
     modifiedAt: Date;
     translations: Translation[];
 }
+
+export interface ProjectForDeletion {
+    name: string;
+}

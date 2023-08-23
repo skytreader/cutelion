@@ -32,4 +32,8 @@ public class DashboardService {
         return projects.stream().map(p -> mm.map(p,
                 PlainProjectDTO.class)).collect(Collectors.toList());
     }
+
+    public void deleteProjectsById(List<Long> ids) {
+        this.projectRepository.deleteAllByIdInBatch(ids);
+    }
 }
