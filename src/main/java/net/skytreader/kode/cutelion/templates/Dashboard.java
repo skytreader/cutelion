@@ -1,16 +1,21 @@
 package net.skytreader.kode.cutelion.templates;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.router.RouterLink;
 import net.skytreader.kode.cutelion.data.service.DashboardService;
 import net.skytreader.kode.cutelion.data.transfer.PlainProjectDTO;
 import net.skytreader.kode.cutelion.data.transfer.ProjectForDeletion;
+import net.skytreader.kode.cutelion.views.ProjectWorksheetView;
 
 import java.util.List;
 import java.util.Set;
@@ -59,15 +64,17 @@ public class Dashboard extends LitTemplate {
                 List<Long> ids = ps.stream().map(pdto -> pdto.getId()).toList();
                 this.dashboardService.deleteProjectsById(ids);
             });
+            deletionConfirmation.setCancelable(true);
             deletionConfirmation.open();
         });
         List<PlainProjectDTO> projects = dashboardService.getProjects();
         getElement().setPropertyList("projects", projects);
         projectList.setItems(projects);
-        projectList.setItemLabelGenerator(PlainProjectDTO::getName);
+        projectList.setRenderer(new ComponentRenderer<Component,
+                PlainProjectDTO>(plainProjectDTO -> new RouterLink(plainProjectDTO.getName(), ProjectWorksheetView.class, plainProjectDTO.getId())));
 
-        for (int i = 0; i < projects.size(); i++) {
-            projectList.addComponents(projects.get(i), new Hr());
+        for (PlainProjectDTO pDto : projects) {
+            projectList.addComponents(pDto, new Hr());
         }
     }
 }
