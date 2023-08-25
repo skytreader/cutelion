@@ -3,6 +3,7 @@ package net.skytreader.kode.cutelion.templates;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Anchor;
@@ -71,7 +72,15 @@ public class Dashboard extends LitTemplate {
         getElement().setPropertyList("projects", projects);
         projectList.setItems(projects);
         projectList.setRenderer(new ComponentRenderer<Component,
-                PlainProjectDTO>(plainProjectDTO -> new RouterLink(plainProjectDTO.getName(), ProjectWorksheetView.class, plainProjectDTO.getId())));
+                PlainProjectDTO>(plainProjectDTO -> {
+                    Button btn = new Button(plainProjectDTO.getName());
+                    btn.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+                    btn.addClickListener(event -> {
+                       btn.getUI().ifPresent(ui -> ui.navigate("project/edit" +
+                               "/" + plainProjectDTO.getId()));
+                    });
+                    return btn;
+        }));
 
         for (PlainProjectDTO pDto : projects) {
             projectList.addComponents(pDto, new Hr());
