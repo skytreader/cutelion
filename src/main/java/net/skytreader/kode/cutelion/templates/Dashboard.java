@@ -6,17 +6,13 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.confirmdialog.ConfirmDialog;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.router.RouterLink;
 import net.skytreader.kode.cutelion.data.service.DashboardService;
 import net.skytreader.kode.cutelion.data.transfer.PlainProjectDTO;
 import net.skytreader.kode.cutelion.data.transfer.ProjectForDeletion;
-import net.skytreader.kode.cutelion.views.ProjectWorksheetView;
 
 import java.util.List;
 import java.util.Set;
@@ -34,6 +30,8 @@ public class Dashboard extends LitTemplate {
 
     @Id("delete-project")
     private Button deleteProjectButton;
+
+    private List<PlainProjectDTO> projects;
 
     public Dashboard(DashboardService dashboardService){
         this.dashboardService = dashboardService;
@@ -62,13 +60,19 @@ public class Dashboard extends LitTemplate {
             ));
             deletionConfirmation.setConfirmText("Delete Projects");
             deletionConfirmation.addConfirmListener(_e -> {
-                List<Long> ids = ps.stream().map(pdto -> pdto.getId()).toList();
+                List<Long> ids =
+                        ps.stream().map(pdto -> {
+                            Long id = pdto.getId();
+                            projects.remove(pdto);
+                            return id;
+                        }).toList();
                 this.dashboardService.deleteProjectsById(ids);
+                projectList.getListDataView().refreshAll();
             });
             deletionConfirmation.setCancelable(true);
             deletionConfirmation.open();
         });
-        List<PlainProjectDTO> projects = dashboardService.getProjects();
+        projects = dashboardService.getProjects();
         getElement().setPropertyList("projects", projects);
         projectList.setItems(projects);
         projectList.setRenderer(new ComponentRenderer<Component,
@@ -81,9 +85,5 @@ public class Dashboard extends LitTemplate {
                     });
                     return btn;
         }));
-
-        for (PlainProjectDTO pDto : projects) {
-            projectList.addComponents(pDto, new Hr());
-        }
     }
 }

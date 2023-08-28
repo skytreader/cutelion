@@ -13,9 +13,9 @@ class Dashboard extends BaseTemplate {
             html ` <vaadin-horizontal-layout theme="spacing padding" style="justify-content: end" ?hidden="${this.projects.length == 0}">
           <vaadin-button theme="primary" id="start-project">+ New</vaadin-button>
           <vaadin-button theme="primary error" id="delete-project">- Delete</vaadin-button>
-        </vaadin-horizontal-layout>
-        <vaadin-list-box style="border: 1px solid #edf2f4" id="project-list">
-        </vaadin-list-box>
+          </vaadin-horizontal-layout>
+          <vaadin-list-box style="border: 1px solid #edf2f4" id="project-list">
+          </vaadin-list-box>
         `}`;
     }
 }
