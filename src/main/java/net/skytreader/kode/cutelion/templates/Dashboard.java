@@ -85,5 +85,9 @@ public class Dashboard extends LitTemplate {
                     });
                     return btn;
         }));
+        deleteProjectButton.setEnabled(projectList.getSelectedItems().size() != 0);
+        projectList.addSelectionListener(event -> {
+            deleteProjectButton.setEnabled(projectList.getSelectedItems().size() != 0);
+        });
     }
 }
