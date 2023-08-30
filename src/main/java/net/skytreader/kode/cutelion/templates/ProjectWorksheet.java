@@ -15,6 +15,7 @@ import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.entity.Translation;
 import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
+import net.skytreader.kode.cutelion.data.service.ProjectWorksheetService;
 import net.skytreader.kode.cutelion.logic.Utils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,6 @@ import java.util.Arrays;
 @Transactional
 public class ProjectWorksheet extends LitTemplate {
     private Project project;
-    private ProjectRepository projectRepository;
 
     @Id("project-name")
     private TextField projectName;
@@ -48,10 +48,8 @@ public class ProjectWorksheet extends LitTemplate {
     @Id("add-translation")
     private Button addTranslationButton;
 
-    public ProjectWorksheet(ProjectRepository projectRepository,
-                            TranslationRepository translationRepository,
+    public ProjectWorksheet(ProjectWorksheetService projectWorksheetService,
                             Project project){
-        this.projectRepository = projectRepository;
         this.project = project;
 
         Binder<Project> projectBinder = this.createProjectBinder();
@@ -68,7 +66,7 @@ public class ProjectWorksheet extends LitTemplate {
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());
                 this.project.setDefaultLanguage(defaultLanguage.getValue());
-                projectRepository.save(this.project);
+                projectWorksheetService.saveProject(this.project);
             });
             addTranslationButton.addClickListener(event -> {
                 Translation t = new Translation(
@@ -79,9 +77,7 @@ public class ProjectWorksheet extends LitTemplate {
                 );
                 translationKey.clear();
                 translationValue.clear();
-                this.project.setLastEntryAddedAt(t.getCreatedAt());
-                translationRepository.save(t);
-                projectRepository.save(this.project);
+                projectWorksheetService.saveTranslation(t);
                 getElement().callJsFunction("addTranslation", t.getKey(),
                         t.getValue(), t.getLocale());
             });
@@ -91,7 +87,7 @@ public class ProjectWorksheet extends LitTemplate {
                 String _defaultLanguage = defaultLanguage.getValue();
                 Project p = new Project(_projectName, _defaultLanguage,
                         Arrays.asList(_defaultLanguage));
-                projectRepository.save(p);
+                projectWorksheetService.saveProject(p);
 
                 persistProjectButton.getUI().ifPresent(ui -> ui.navigate("project" +
                         "/edit/" + p.getId()));

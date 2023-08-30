@@ -70,7 +70,9 @@ public class Project extends CreativeAwesomeModel {
     }
 
     public void setLastEntryAddedAt(ZonedDateTime lastEntryAddedAt) {
-        this.lastEntryAddedAt = lastEntryAddedAt;
+        if (lastEntryAddedAt.isAfter(this.lastEntryAddedAt)) {
+            this.lastEntryAddedAt = lastEntryAddedAt;
+        }
     }
 
     public List<Translation> getTranslations() {
