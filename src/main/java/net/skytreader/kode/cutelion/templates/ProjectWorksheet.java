@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
@@ -13,8 +14,6 @@ import elemental.json.JsonValue;
 import elemental.json.impl.JsonUtil;
 import net.skytreader.kode.cutelion.data.entity.Project;
 import net.skytreader.kode.cutelion.data.entity.Translation;
-import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
-import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.data.service.ProjectWorksheetService;
 import net.skytreader.kode.cutelion.logic.Utils;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,26 +42,31 @@ public class ProjectWorksheet extends LitTemplate {
     private TextField translationValue;
 
     @Id("translation-locale")
-    private TextField translationLocale;
+    private ComboBox<String> translationLocale;
 
     @Id("add-translation")
     private Button addTranslationButton;
 
+    private String enteredLocale;
+
     public ProjectWorksheet(ProjectWorksheetService projectWorksheetService,
                             Project project){
         this.project = project;
+        this.enteredLocale = project.getDefaultLanguage();
 
         Binder<Project> projectBinder = this.createProjectBinder();
 
         if (project != null) {
             projectBinder.setBean(project);
             ObjectMapper om = new ObjectMapper();
+            translationLocale.setItems(project.getLocales());
             try {
                 JsonValue jv = JsonUtil.parse(om.writeValueAsString(project));
                 getElement().setPropertyJson("project", jv);
             } catch (JsonProcessingException jpe) {
                 jpe.printStackTrace();
             }
+            configureTranslationLocale();
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());
                 this.project.setDefaultLanguage(defaultLanguage.getValue());
@@ -72,7 +76,8 @@ public class ProjectWorksheet extends LitTemplate {
                 Translation t = new Translation(
                         translationKey.getValue(),
                         translationValue.getValue(),
-                        translationLocale.getValue(),
+                        translationLocale.isEmpty() ? this.enteredLocale :
+                                translationLocale.getValue(),
                         this.project
                 );
                 translationKey.clear();
@@ -104,10 +109,10 @@ public class ProjectWorksheet extends LitTemplate {
                 .asRequired()
                 .bind(Translation::getValue, Translation::setValue);
         translationBinder.forField(translationLocale)
-                .withValidator(Utils::isValidLocaleString, "does not match " +
-                        "locale string pattern")
+                .withValidator(Utils::isValidLocaleString,
+                        "does not match locale string pattern")
                 .bind(Translation::getLocale, Translation::setLocale);
-       return translationBinder;
+        return translationBinder;
     }
 
     private Binder<Project> createProjectBinder() {
@@ -117,9 +122,15 @@ public class ProjectWorksheet extends LitTemplate {
                 .bind(Project::getName,
                         Project::setName);
         projectBinder.forField(defaultLanguage)
-                .withValidator(Utils::isValidLocaleString, "does not fit " +
+                .withValidator(Utils::isValidLocaleString, "does not match " +
                         "locale string pattern")
                 .bind(Project::getDefaultLanguage, Project::setDefaultLanguage);
         return projectBinder;
+    }
+
+    private void configureTranslationLocale(){
+        translationLocale.addValueChangeListener(event -> {
+            this.enteredLocale = event.getValue();
+        });
     }
 }
