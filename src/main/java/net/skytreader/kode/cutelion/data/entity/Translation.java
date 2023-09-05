@@ -38,6 +38,7 @@ public class Translation extends CreativeAwesomeModel {
         this.value = value;
         this.project = project;
         this.locale = Utils.toCanonlocaleForm(locale);
+        this.project.addLocale(this.locale);
         this.project.setLastEntryAddedAt(this.getCreatedAt());
         this.updateProjectLocales();
     }

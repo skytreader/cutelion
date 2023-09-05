@@ -12,8 +12,10 @@ import net.skytreader.kode.cutelion.logic.Utils;
 import org.hibernate.annotations.Type;
 
 import java.time.ZonedDateTime;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="projects")
@@ -32,13 +34,13 @@ public class Project extends CreativeAwesomeModel {
 
     @Type(ListArrayType.class)
     @Column(name="locales")
-    private List<String> locales;
+    private Set<String> locales;
 
     protected Project() {
 
     }
 
-    public Project(String name, String defaultLanguage, List<String> locales) {
+    public Project(String name, String defaultLanguage, Set<String> locales) {
         super();
         this.name = name;
         this.defaultLanguage = Utils.toCanonlocaleForm(defaultLanguage);
@@ -46,6 +48,10 @@ public class Project extends CreativeAwesomeModel {
             locales.add(this.defaultLanguage);
         }
         this.locales = locales;
+    }
+
+    public Project(String name, String defaultLanguage, List<String> locales){
+        new Project(name, defaultLanguage, new HashSet<String>(locales));
     }
 
     public String getName() {
@@ -79,11 +85,11 @@ public class Project extends CreativeAwesomeModel {
         return translations;
     }
 
-    public List<String> getLocales() {
+    public Set<String> getLocales() {
         return locales;
     }
 
-    public void setLocales(List<String> locales) {
+    public void setLocales(Set<String> locales) {
         this.locales = locales;
     }
 
