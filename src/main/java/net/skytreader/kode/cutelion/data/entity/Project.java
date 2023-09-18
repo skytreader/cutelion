@@ -37,7 +37,7 @@ public class Project extends CreativeAwesomeModel {
     private Set<String> locales;
 
     protected Project() {
-
+        super();
     }
 
     public Project(String name, String defaultLanguage, Set<String> locales) {

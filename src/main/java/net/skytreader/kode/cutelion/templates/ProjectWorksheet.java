@@ -49,17 +49,23 @@ public class ProjectWorksheet extends LitTemplate {
 
     private String enteredLocale;
 
+    Binder<Translation> translationBinder;
+
     public ProjectWorksheet(ProjectWorksheetService projectWorksheetService,
                             Project project){
         this.project = project;
-        this.enteredLocale = project.getDefaultLanguage();
 
         Binder<Project> projectBinder = this.createProjectBinder();
 
         if (project != null) {
+            translationLocale.setItems(project.getLocales());
+            Translation translationBean = new Translation();
+            translationBean.setProject(project);
+            this.translationBinder = this.createTranslationBinder();
+            this.translationBinder.setBean(translationBean);
+            this.enteredLocale = project.getDefaultLanguage();
             projectBinder.setBean(project);
             ObjectMapper om = new ObjectMapper();
-            translationLocale.setItems(project.getLocales());
             try {
                 JsonValue jv = JsonUtil.parse(om.writeValueAsString(project));
                 getElement().setPropertyJson("project", jv);
@@ -73,16 +79,10 @@ public class ProjectWorksheet extends LitTemplate {
                 projectWorksheetService.saveProject(this.project);
             });
             addTranslationButton.addClickListener(event -> {
-                Translation t = new Translation(
-                        translationKey.getValue(),
-                        translationValue.getValue(),
-                        translationLocale.isEmpty() ? this.enteredLocale :
-                                translationLocale.getValue(),
-                        this.project
-                );
+                Translation t = translationBinder.getBean();
+                projectWorksheetService.saveTranslation(t);
                 translationKey.clear();
                 translationValue.clear();
-                projectWorksheetService.saveTranslation(t);
                 getElement().callJsFunction("addTranslation", t.getKey(),
                         t.getValue(), t.getLocale());
             });

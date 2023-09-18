@@ -27,8 +27,11 @@ public class Translation extends CreativeAwesomeModel {
     @JsonBackReference
     private Project project;
 
-    protected Translation() {
-
+    public Translation() {
+        super();
+        this.key = "";
+        this.value = "";
+        this.locale = "";
     }
 
     public Translation(String key, String value,
