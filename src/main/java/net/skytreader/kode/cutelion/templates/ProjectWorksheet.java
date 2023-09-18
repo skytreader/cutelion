@@ -10,6 +10,7 @@ import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.BinderValidationStatus;
 import elemental.json.JsonValue;
 import elemental.json.impl.JsonUtil;
 import net.skytreader.kode.cutelion.data.entity.Project;
@@ -79,23 +80,31 @@ public class ProjectWorksheet extends LitTemplate {
                 projectWorksheetService.saveProject(this.project);
             });
             addTranslationButton.addClickListener(event -> {
-                Translation t = translationBinder.getBean();
-                projectWorksheetService.saveTranslation(t);
-                translationKey.clear();
-                translationValue.clear();
-                getElement().callJsFunction("addTranslation", t.getKey(),
-                        t.getValue(), t.getLocale());
+                BinderValidationStatus validationStatus =
+                        translationBinder.validate();
+                if (validationStatus.isOk()) {
+                    Translation t = translationBinder.getBean();
+                    projectWorksheetService.saveTranslation(t);
+                    translationKey.clear();
+                    translationValue.clear();
+                    getElement().callJsFunction("addTranslation", t.getKey(),
+                            t.getValue(), t.getLocale());
+                }
             });
         } else {
             persistProjectButton.addClickListener(event -> {
-                String _projectName = projectName.getValue();
-                String _defaultLanguage = defaultLanguage.getValue();
-                Project p = new Project(_projectName, _defaultLanguage,
-                        Arrays.asList(_defaultLanguage));
-                projectWorksheetService.saveProject(p);
+                BinderValidationStatus validationStatus =
+                        projectBinder.validate();
+                if (validationStatus.isOk()) {
+                    String _projectName = projectName.getValue();
+                    String _defaultLanguage = defaultLanguage.getValue();
+                    Project p = new Project(_projectName, _defaultLanguage,
+                            Arrays.asList(_defaultLanguage));
+                    projectWorksheetService.saveProject(p);
 
-                persistProjectButton.getUI().ifPresent(ui -> ui.navigate("project" +
-                        "/edit/" + p.getId()));
+                    persistProjectButton.getUI().ifPresent(ui -> ui.navigate("project" +
+                            "/edit/" + p.getId()));
+                }
             });
         }
     }
