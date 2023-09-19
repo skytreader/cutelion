@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: Chad Estioco
+      changes:
+        - addUniqueConstraint:
+            tableName: translations
+            columnNames: project_id, key
+            constraintName: translations-projet_id-key-uniq
+      rollback:
+        - dropUniqueConstraint:
+            tableName: translations
+            constraintName: translations-project_id-key-uniq
