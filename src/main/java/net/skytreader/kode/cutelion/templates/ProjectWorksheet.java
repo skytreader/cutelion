@@ -60,10 +60,8 @@ public class ProjectWorksheet extends LitTemplate {
 
         if (project != null) {
             translationLocale.setItems(project.getLocales());
-            Translation translationBean = new Translation();
-            translationBean.setProject(project);
             this.translationBinder = this.createTranslationBinder();
-            this.translationBinder.setBean(translationBean);
+            this.createNewTranslationBean();
             this.enteredLocale = project.getDefaultLanguage();
             projectBinder.setBean(project);
             ObjectMapper om = new ObjectMapper();
@@ -89,6 +87,7 @@ public class ProjectWorksheet extends LitTemplate {
                     translationValue.clear();
                     getElement().callJsFunction("addTranslation", t.getKey(),
                             t.getValue(), t.getLocale());
+                    this.createNewTranslationBean();
                 }
             });
         } else {
@@ -141,5 +140,11 @@ public class ProjectWorksheet extends LitTemplate {
         translationLocale.addValueChangeListener(event -> {
             this.enteredLocale = event.getValue();
         });
+    }
+
+    private void createNewTranslationBean() {
+        Translation t = new Translation();
+        t.setProject(this.project);
+        this.translationBinder.setBean(t);
     }
 }

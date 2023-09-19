@@ -3,8 +3,6 @@ package net.skytreader.kode.cutelion.views;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.*;
 import net.skytreader.kode.cutelion.data.entity.Project;
-import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
-import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import net.skytreader.kode.cutelion.data.service.ProjectWorksheetService;
 import net.skytreader.kode.cutelion.templates.ProjectWorksheet;
 import org.springframework.transaction.annotation.Transactional;
