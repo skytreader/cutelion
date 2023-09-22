@@ -140,6 +140,7 @@ public class ProjectWorksheet extends LitTemplate {
         translationLocale.addValueChangeListener(event -> {
             this.enteredLocale = event.getValue();
         });
+        translationLocale.setValue(this.enteredLocale);
     }
 
     private void createNewTranslationBean() {
