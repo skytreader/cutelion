@@ -6,6 +6,7 @@ import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.JsModule;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.littemplate.LitTemplate;
 import com.vaadin.flow.component.template.Id;
 import com.vaadin.flow.component.textfield.TextField;
@@ -45,10 +46,11 @@ public class ProjectWorksheet extends LitTemplate {
     @Id("translation-locale")
     private ComboBox<String> translationLocale;
 
+    @Id("translation-grid")
+    private Grid<Translation> translationGrid;
+
     @Id("add-translation")
     private Button addTranslationButton;
-
-    private String enteredLocale;
 
     Binder<Translation> translationBinder;
 
@@ -62,7 +64,6 @@ public class ProjectWorksheet extends LitTemplate {
             translationLocale.setItems(project.getLocales());
             this.translationBinder = this.createTranslationBinder();
             this.createNewTranslationBean();
-            this.enteredLocale = project.getDefaultLanguage();
             projectBinder.setBean(project);
             ObjectMapper om = new ObjectMapper();
             try {
@@ -137,15 +138,16 @@ public class ProjectWorksheet extends LitTemplate {
     }
 
     private void configureTranslationLocale(){
+        translationLocale.setValue(this.project.getDefaultLanguage());
         translationLocale.addValueChangeListener(event -> {
-            this.enteredLocale = event.getValue();
+
         });
-        translationLocale.setValue(this.enteredLocale);
     }
 
     private void createNewTranslationBean() {
         Translation t = new Translation();
         t.setProject(this.project);
+        t.setLocale(this.translationBinder.getBean().getLocale());
         this.translationBinder.setBean(t);
     }
 }
