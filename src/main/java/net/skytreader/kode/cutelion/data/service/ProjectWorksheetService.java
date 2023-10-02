@@ -6,6 +6,8 @@ import net.skytreader.kode.cutelion.data.repository.ProjectRepository;
 import net.skytreader.kode.cutelion.data.repository.TranslationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectWorksheetService {
     private final ProjectRepository projectRepository;
@@ -27,5 +29,10 @@ public class ProjectWorksheetService {
 
     public Project findProject(Long projectId) {
         return this.projectRepository.findById(projectId).get();
+    }
+
+    public List<Translation> findTranslationsByLocaleAndProject(String locale,
+                                                            Project p) {
+        return this.translationRepository.findByLocaleAndProject(locale, p);
     }
 }

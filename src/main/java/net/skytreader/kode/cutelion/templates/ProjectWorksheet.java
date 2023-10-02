@@ -21,6 +21,7 @@ import net.skytreader.kode.cutelion.logic.Utils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Tag("project-worksheet")
 @JsModule("./src/project-worksheet.ts")
@@ -52,10 +53,13 @@ public class ProjectWorksheet extends LitTemplate {
     @Id("add-translation")
     private Button addTranslationButton;
 
-    Binder<Translation> translationBinder;
+    private Binder<Translation> translationBinder;
+    private List<Translation> shownTranslations;
+    private ProjectWorksheetService projectWorksheetService;
 
     public ProjectWorksheet(ProjectWorksheetService projectWorksheetService,
                             Project project){
+        this.projectWorksheetService = projectWorksheetService;
         this.project = project;
 
         Binder<Project> projectBinder = this.createProjectBinder();
@@ -73,6 +77,11 @@ public class ProjectWorksheet extends LitTemplate {
                 jpe.printStackTrace();
             }
             configureTranslationLocale();
+            initGrid();
+            this.shownTranslations =
+                    projectWorksheetService.findTranslationsByLocaleAndProject(this.project.getDefaultLanguage(), this.project);
+            translationGrid.setItems(this.shownTranslations);
+
             persistProjectButton.addClickListener(event -> {
                 this.project.setName(projectName.getValue());
                 this.project.setDefaultLanguage(defaultLanguage.getValue());
@@ -84,10 +93,10 @@ public class ProjectWorksheet extends LitTemplate {
                 if (validationStatus.isOk()) {
                     Translation t = translationBinder.getBean();
                     projectWorksheetService.saveTranslation(t);
+                    this.shownTranslations.add(t);
+                    this.translationGrid.getDataProvider().refreshAll();
                     translationKey.clear();
                     translationValue.clear();
-                    getElement().callJsFunction("addTranslation", t.getKey(),
-                            t.getValue(), t.getLocale());
                     this.createNewTranslationBean();
                 }
             });
@@ -107,6 +116,12 @@ public class ProjectWorksheet extends LitTemplate {
                 }
             });
         }
+    }
+
+    private void initGrid() {
+        this.translationGrid.addColumn(Translation::getKey).setHeader("Key");
+        this.translationGrid.addColumn(Translation::getValue).setHeader(
+                "Value");
     }
 
     private Binder<Translation> createTranslationBinder() {
@@ -140,14 +155,21 @@ public class ProjectWorksheet extends LitTemplate {
     private void configureTranslationLocale(){
         translationLocale.setValue(this.project.getDefaultLanguage());
         translationLocale.addValueChangeListener(event -> {
-
+            this.shownTranslations =
+                    this.projectWorksheetService.findTranslationsByLocaleAndProject(event.getValue(), this.project);
+            this.translationGrid.setItems(this.shownTranslations);
+            this.translationGrid.getDataProvider().refreshAll();
         });
     }
 
     private void createNewTranslationBean() {
         Translation t = new Translation();
         t.setProject(this.project);
-        t.setLocale(this.translationBinder.getBean().getLocale());
+        if (this.translationBinder.getBean() == null) {
+            t.setLocale(this.project.getDefaultLanguage());
+        } else {
+            t.setLocale(this.translationBinder.getBean().getLocale());
+        }
         this.translationBinder.setBean(t);
     }
 }
