@@ -80,6 +80,9 @@ public class ProjectWorksheet extends LitTemplate {
             initGrid();
             this.shownTranslations =
                     projectWorksheetService.findTranslationsByLocaleAndProject(this.project.getDefaultLanguage(), this.project);
+            this.shownTranslations.sort(
+                    (Translation t1, Translation t2) -> t1.getKey().compareTo(t2.getKey())
+            );
             translationGrid.setItems(this.shownTranslations);
 
             persistProjectButton.addClickListener(event -> {

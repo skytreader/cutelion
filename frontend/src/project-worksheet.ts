@@ -9,10 +9,14 @@ class ProjectWorksheet extends BaseTemplate {
     private project?: Project;
 
     // https://vaadin.com/docs/latest/components/form-layout
-    private responsiveSteps: FormLayoutResponsiveStep[] = [
+    private projectBarResponsiveSteps: FormLayoutResponsiveStep[] = [
         {minWidth: 0, columns: 1},
         {minWidth: '320px', columns: 2},
         {minWidth: '550px', columns: 4}
+    ];
+    private translationBarResponsiveSteps: FormLayoutResponsiveStep[] = [
+        {minWidth: 0, columns: 1},
+        {minWidth: '320px', columns: 3}
     ];
 
     protected override pageContent() {
@@ -23,15 +27,16 @@ class ProjectWorksheet extends BaseTemplate {
         return html`
         <h2>${headerText}</h2>
         <vaadin-horizontal-layout theme="spacing">
-            <vaadin-form-layout id="project-details-form" .responsiveSteps="${this.responsiveSteps}">
+            <vaadin-form-layout id="project-details-form" .responsiveSteps="${this.projectBarResponsiveSteps}">
                 <vaadin-text-field id="project-name" label="Name"></vaadin-text-field>
                 <vaadin-text-field type="text" id="default-language" label="Default Language" placeholder="en-US"></vaadin-text-field>
             </vaadin-form-layout>
             <vaadin-button id="persist-project" theme="primary" style="top: 20px;">${buttonText}</vaadin-button>
         </vaadin-horizontal-layout>
         <vaadin-vertical-layout ?hidden="${!hasProject}">
+            <hr>
             <vaadin-horizontal-layout>
-                <vaadin-form-layout id="translation-form" .responsiveSteps="${this.responsiveSteps}">
+                <vaadin-form-layout id="translation-form" .responsiveSteps="${this.translationBarResponsiveSteps}">
                     <vaadin-combo-box id="translation-locale" allow-custom-value label="Locale"></vaadin-combo-box>
                     <vaadin-text-field id="translation-key" label="Translation Key"></vaadin-text-field>
                     <vaadin-text-field id="translation-value" label="String value"></vaadin-text-field>
