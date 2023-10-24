@@ -21,6 +21,7 @@ import net.skytreader.kode.cutelion.logic.Utils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 @Tag("project-worksheet")
@@ -65,7 +66,7 @@ public class ProjectWorksheet extends LitTemplate {
         Binder<Project> projectBinder = this.createProjectBinder();
 
         if (project != null) {
-            translationLocale.setItems(project.getLocales());
+            translationLocale.setItems(project.getLocales().stream().sorted().toList());
             this.translationBinder = this.createTranslationBinder();
             this.createNewTranslationBean();
             projectBinder.setBean(project);
@@ -81,7 +82,7 @@ public class ProjectWorksheet extends LitTemplate {
             this.shownTranslations =
                     projectWorksheetService.findTranslationsByLocaleAndProject(this.project.getDefaultLanguage(), this.project);
             this.shownTranslations.sort(
-                    (Translation t1, Translation t2) -> t1.getKey().compareTo(t2.getKey())
+                    Comparator.comparing(Translation::getKey)
             );
             translationGrid.setItems(this.shownTranslations);
 
